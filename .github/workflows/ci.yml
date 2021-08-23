@@ -3,6 +3,7 @@ on:
   push:
     branches:
     - master
+    - update-repository
     tags:
     - "v*"
   pull_request:
@@ -17,3 +18,22 @@ jobs:
         submodules: true
     - name: Test
       run: .github/scripts/test.sh
+
+  update:
+    # needs: ["test"]
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        submodules: true
+    - name: GPG setup
+      run: .github/scripts/gpg-setup.sh
+      env:
+          PGP_SECRET: ${{ secrets.PGP_SECRET }}
+    - name: Update debian package
+      run: .github/scripts/updateDebian.sh
+      env:
+          PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+          KEYNAME: ${{ secrets.KEYNAME }}

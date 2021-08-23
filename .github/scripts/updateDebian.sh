@@ -29,4 +29,4 @@ git config user.email "$GIT_EMAIL"
 echo "Pushing changes"
 git checkout -b ci-update
 git commit -am "$MSG"
-git push origin ci-update
+git push origin ci-update --force-with-lease

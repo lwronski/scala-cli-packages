@@ -38,3 +38,8 @@ jobs:
       env:
           PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
           KEYNAME: ${{ secrets.KEYNAME }}
+    - name: Update yum package
+      run: .github/scripts/updateRedHat.sh
+      env:
+        PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+        KEYNAME: ${{ secrets.KEYNAME }}

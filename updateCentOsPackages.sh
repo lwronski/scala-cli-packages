@@ -13,7 +13,7 @@ gpg-connect-agent reloadagent /bye
 
 yum install rpm-sign  createrepo -y
 # https://unix.stackexchange.com/questions/328601/rpmsign-with-cli-password-prompt
-  /usr/libexec/gpg-preset-passphrase --passphrase ${PGP_PASSPHRASE} --preset ${KEYGRIP}
+/usr/libexec/gpg-preset-passphrase --passphrase ${PGP_PASSPHRASE} --preset ${KEYGRIP}
 
 GPG_NAME="_gpg_name $GPG_EMAIL"
 rpmsign --define "$GPG_NAME" --addsign ./CentOS/Packages/*.rpm
